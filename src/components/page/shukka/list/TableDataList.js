@@ -32,15 +32,15 @@ export default function TableDataList() {
                         出荷指示書
                     </button>
                 </div>
-                <div>
+                <div className='flex text-center'>
                     <button className="bg-white border border-sky-500 text-sky h-8 px-5 text-lg transition-colors duration-150 rounded-[5rem] focus:shadow-outline m-[auto] hover:bg-cyan-600/75">
                         一括で編集
                     </button>
                     <button className="bg-white border border-sky-500 text-sky h-8 px-5 text-lg transition-colors duration-150 rounded-[5rem] focus:shadow-outline m-[auto] mr-4 ml-4 hover:bg-cyan-600/75">
                         表示設定
                     </button>
-                    <button className="bg-white border border-sky-500 text-sky h-8 px-5 text-lg transition-colors duration-150 rounded-full focus:shadow-outline m-[auto] hover:bg-cyan-600/75">
-                        …
+                    <button className="text-center items-center bg-white border border-sky-500 text-sky h-8 px-5 text-lg transition-colors duration-150 rounded-full focus:shadow-outline m-[auto] hover:bg-cyan-600/75">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-three-dots" viewBox="0 0 16 16">  <path d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3" /></svg>
                     </button>
                 </div>
             </div>

@@ -23,7 +23,7 @@ export default function Navbar() {
                     </button>
                     <span className="content-center">ログインユーザー：kashiwazaki</span>
                     <a href="#" className="ml-4 text-gray">
-                        <button className="bg-slate-400 text- h-10 px-5 text-lg transition-colors duration-150 rounded-lg focus:shadow-outline hover:bg-slate-500">
+                        <button className="bg-inherit border border-black h-9 px-3 text-lg transition-colors duration-150 rounded-lg focus:shadow-outline hover:bg-slate-500/25">
                             ログアウト
                         </button>
                     </a>

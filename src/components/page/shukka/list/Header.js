@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux'
 import { getColumns, searchShukka } from '../../../../redux/actions';
 import axios from 'axios';
 import { API_BASE_URL } from '../../../../constants'
+import Loading from '../../navbar/Loading';
 
 export default function Header({ subHeaderParams }) {
 
@@ -10,8 +11,9 @@ export default function Header({ subHeaderParams }) {
     const [tantoshaList, setTantoshaList] = useState([])
     const [soukoList, setSoukoList] = useState([])
     const [tanabanList, setTanabanList] = useState([])
-    const [column, setColumn] = useState([])
     const dispatch = useDispatch();
+
+    const [loading, setLoading] = useState(false);
 
     const [shukkaSearchParams, setShukkaSearchParams] = useState(
         {
@@ -77,7 +79,6 @@ export default function Header({ subHeaderParams }) {
         try {
             const response = await axios.get(`${API_BASE_URL}/setting-data/get-list-by-screen-id?screenId=${screenId}`)
             dispatch(getColumns(response.data.data))
-            setColumn(response.data.data)
         } catch (error) {
             console.log('Error fetching setting column:', error)
         }
@@ -111,22 +112,30 @@ export default function Header({ subHeaderParams }) {
     }
 
     const handleButtonSearch = async () => {
+        setLoading(true);
         await axios
             .post(`${API_BASE_URL}/shukka/get-list`, shukkaSearchParams)
             .then(res => {
                 if (res.data.data.length > 0) {
-                    dispatch(searchShukka(res.data.data))
-
+                    dispatch(searchShukka(res.data.data));
                 } else {
-                    dispatch(searchShukka(res.data.message))
+                    dispatch(searchShukka(res.data.message));
                 }
-
+                setLoading(false);
             })
+            .catch(error => {
+                console.error("Error fetching data: ", error);
+                setLoading(false);
+            });
     }
 
 
     return (
         <>
+
+            {loading &&
+                <Loading />
+            }
             <div id="search-param" className="space-y-2 mx-10">
                 <div className=" flex justify-between border-b-2 border-white pb-2">
                     <div className="flex-1 flex items-center">

@@ -6,6 +6,8 @@ import { shukkaHeaderEntry } from '../../../../redux/selector';
 import { getShukkaSuccess, showMessageToats, updateShukkaHeaderEntry } from '../../../../redux/actions';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import Loading from '../../navbar/Loading';
+
 export default function TableCreate() {
 
     const [seihinList, setSeihinList] = useState([]);
@@ -17,6 +19,9 @@ export default function TableCreate() {
     const shukkaHeader = useSelector(shukkaHeaderEntry);
     const navigate = useNavigate();
     const dispatch = useDispatch();
+
+    const [loading, setLoading] = useState(false);
+
     const [shukkaMesaiList, setShukkaMesaiList] = useState([
         {
             seihinId: '',
@@ -220,10 +225,13 @@ export default function TableCreate() {
             return;
         }
 
+        setLoading(true);
+
         try {
 
             const res = await axios.post(`${API_BASE_URL}/shukka/create`, shukkaDto)
             if (res.data.status === 1) {
+                setLoading(false)
                 dispatch(getShukkaSuccess(res.data.data.shukkaHeader))
                 navigate("/shukka-success")
             } else {
@@ -236,6 +244,8 @@ export default function TableCreate() {
 
     return (
         <>
+            {loading && <Loading />}
+
             <div className="flex justify-between pb-3">
                 <div>
                     <button className={`border border-sky-500 text-sky h-8 px-5 text-lg 
